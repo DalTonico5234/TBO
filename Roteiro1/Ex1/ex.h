@@ -1,5 +1,5 @@
-#ifndef ex_1
-#define ex_1
+#ifndef ex
+#define ex
 
 #include <stdio.h>
 #include <stdlib.h>

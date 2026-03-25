@@ -1,19 +1,19 @@
-#include "ex1.h"
+#include "ex.h"
 
 struct sieve
 {
-    char *marcadores;
+    int *marcadores;
     int N;
 };
 
 Sieve *construct(int N)
 {
-    Sieve *new = (Sieve*) malloc (sizeof(Sieve));
+    Sieve *new = (Sieve *)malloc(sizeof(Sieve));
 
     new->N = N;
-    new->marcadores = (char *) calloc (N+1, sizeof(char));
+    new->marcadores = (int *)calloc(N + 1, sizeof(int));
 
-    for (int i=2; i <= new->N; i++)
+    for (int i = 2; i <= new->N; i++)
     {
         new->marcadores[i] = 0;
     }
@@ -23,13 +23,16 @@ Sieve *construct(int N)
 
 void marcar_numeros(Sieve *sieve)
 {
-    for (int i=2; i <= sieve->N; i++)
+    for (int i = 2; i <= sieve->N; i++)
     {
-        for (int j=i+1; j <= sieve->N; j++)
+        if (!sieve->marcadores[i])
         {
-            if (!(j % i)) //multiplo
+            for (int j = 2 * i; j <= sieve->N; j += i)
             {
-                sieve->marcadores[j] = 1;
+                if (!(j % i)) // multiplo
+                {
+                    sieve->marcadores[j] = 1;
+                }
             }
         }
     }
@@ -37,7 +40,7 @@ void marcar_numeros(Sieve *sieve)
 
 void print_primos(Sieve *sieve)
 {
-    for (int i=2; i <= sieve->N; i++)
+    for (int i = 2; i <= sieve->N; i++)
     {
         if (!(sieve->marcadores[i]))
         {
@@ -51,4 +54,3 @@ void destruct(Sieve *sieve)
     free(sieve->marcadores);
     free(sieve);
 }
-

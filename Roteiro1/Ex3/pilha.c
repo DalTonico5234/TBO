@@ -1,5 +1,6 @@
 #include "pilha.h"
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct no {
   void *dado;
@@ -8,10 +9,13 @@ typedef struct no {
 
 struct pilha {
   No *topo;
+  size_t tam_elem;
 };
 
-Pilha *criaPilha() {
+Pilha *criaPilha(size_t tam_elem) {
   Pilha *sonic = (Pilha *)malloc(sizeof(Pilha));
+
+  sonic->tam_elem = tam_elem;
 
   sonic->topo = NULL;
 
@@ -20,21 +24,24 @@ Pilha *criaPilha() {
 
 void empilha(Pilha *sonic, void *dado) {
   No *novo = (No *)malloc(sizeof(No));
-  novo->dado = dado;
+  
+  novo->dado = malloc (sonic->tam_elem);
+
+  memcpy(novo->dado, dado, sonic->tam_elem);
 
   novo->prox = sonic->topo;
   sonic->topo = novo;
 }
 
-void *desempilha(Pilha *sonic) {
+void desempilha(Pilha *sonic, void *destino) {
   No *morto = sonic->topo;
-  void *dado = sonic->topo->dado;
+
+  memcpy(destino, morto->dado, sonic->tam_elem);
 
   sonic->topo = sonic->topo->prox;
 
+  free(morto->dado);
   free(morto);
-
-  return dado;
 }
 
 void destroiPilha(Pilha *sonic) {
@@ -45,6 +52,7 @@ void destroiPilha(Pilha *sonic) {
 
     for (atual; atual != NULL; atual = prox) {
       prox = atual->prox;
+      free(atual->dado);
       free(atual);
     }
   }

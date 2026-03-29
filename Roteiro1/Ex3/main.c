@@ -33,22 +33,24 @@ double calculo(double op1, double op2, char operacao)
 
 int main(int argc, char *argv[])
 {
-    Pilha *operadores = criaPilha();
-    Pilha *operandos = criaPilha();
+    Pilha *operadores = criaPilha(sizeof(char));
+    Pilha *operandos = criaPilha(sizeof(double));
 
     double operando = 0;
+    char operador = 0;
     double resultado = 0;
-    char sResultado[6];
 
     for (int i = 1; i < argc; i++)
     {
-        if ('0' <= argv[i][0] <= '9')
+        if ('0' <= argv[i][0] && argv[i][0]<= '9')
         {
-            empilha(operandos, argv[i]);
+            operando = atof(argv[i]);
+            empilha(operandos, &operando);
         }
         else if (argv[i][0] == '+' || argv[i][0] == '-' || argv[i][0] == '*' || argv[i][0] == '/')
         {
-            empilha(operadores, argv[i]);
+            operador = argv[i][0];
+            empilha(operadores, &operador);
         }
         else if (argv[i][0] == '(')
         {
@@ -56,16 +58,21 @@ int main(int argc, char *argv[])
         }
         else if (argv[i][0] == ')')
         {
-            double op1 =  atof((char *)desempilha(operandos));
-            double op2 =  atof((char *)desempilha(operandos));
-            char *operacao = desempilha(operadores);
-            resultado = calculo(op1, op2, *operacao);
-            sprintf(sResultado, "%f", resultado);
-            empilha(operandos, sResultado);
+            double op2;
+            desempilha(operandos, &op2);
+            double op1;
+            desempilha(operandos, &op1);
+            desempilha(operadores, &operador);
+            resultado = calculo(op1, op2, operador);
+            empilha(operandos, &resultado);
         }
         else
         {
             printf("DEU PAU: Operacao Invalidaaaa!!!\n\n");
         }
     }
+    printf("%.2f\n", resultado);
+
+    destroiPilha(operadores);
+    destroiPilha(operandos);
 }

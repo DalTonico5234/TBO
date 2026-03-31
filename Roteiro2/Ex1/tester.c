@@ -23,11 +23,13 @@ Tester *constructTester(int N)
     {
         insertKey(test->tree, rand());
     }
+
+    return test;
 }
 
 void printHeight(Tester *test)
 {
-    printf("HEIGHT: %d\n", height(test->tree));
+    printf("%d\n", height(test->tree));
 }
 
 void freeTester(Tester *test)

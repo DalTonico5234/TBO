@@ -1,12 +1,11 @@
 #include "tester.h"
 #include "BST.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-#define N 1000000
-
-int main()
+int main(int argc, char *argv[])
 {
-    Tester *test = constructTester(N);
+    Tester *test = constructTester(atoi(argv[argc-1]));
 
     printHeight(test);
 

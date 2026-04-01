@@ -27,6 +27,11 @@ Tester *constructTester(int N)
     return test;
 }
 
+void printTree(Tester *test)
+{
+    recursive_pre_order_transveral(test->tree, print);
+}
+
 void printHeight(Tester *test)
 {
     printf("%d\n", height(test->tree));

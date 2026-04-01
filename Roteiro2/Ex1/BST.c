@@ -1,5 +1,6 @@
 #include "BST.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 struct bst
 {
@@ -10,7 +11,7 @@ struct bst
 
 BST *constructBST()
 {
-    BST *new = (BST *) malloc (sizeof(BST));
+    BST *new = (BST *)malloc(sizeof(BST));
 
     new->left = NULL;
     new->right = NULL;
@@ -38,7 +39,7 @@ void insertKey(BST *tree, int key)
         {
             insertKey(tree->left, key);
         }
-    } 
+    }
 
     // Buscar na direita
     else if (tree->data < key)
@@ -67,11 +68,49 @@ int height(BST *tree)
 
     if (leftHeight > rightHeight)
     {
-        return (leftHeight+1);
+        return (leftHeight + 1);
     }
     else
     {
-        return (rightHeight+1);
+        return (rightHeight + 1);
+    }
+}
+
+void recursive_pre_order_transveral(BST *tree, void (*visit)(BST *))
+{
+    if (tree != NULL)
+    {
+        visit(tree);
+        recursive_pre_order_transveral(tree->left, visit);
+        recursive_pre_order_transveral(tree->right, visit);
+    }
+}
+
+void recursive_in_order_transveral(BST *tree, void (*visit)(BST *))
+{
+    if (tree != NULL)
+    {
+        recursive_in_order_transveral(tree->left, visit);
+        visit(tree);
+        recursive_in_order_transveral(tree->right, visit);
+    }
+}
+
+void recursive_post_order_transveral(BST *tree, void (*visit)(BST *))
+{
+    if (tree != NULL)
+    {
+        recursive_post_order_transveral(tree->left, visit);
+        recursive_post_order_transveral(tree->right, visit);
+        visit(tree);
+    }
+}
+
+void print(BST *tree)
+{
+    if (tree != NULL)
+    {
+        printf("%d ", tree->data);
     }
 }
 

@@ -8,10 +8,10 @@ loop:
 	done
 
 compile:
-	gcc *.c -o main
+	gcc *.c -o main &
 
 run:
-	./main 1000000 >> heights.txt
+	./main 1000000 >> heights.txt &
 
 debug:
 	gcc *.c -c -Wall -Wextra -Werror

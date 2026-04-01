@@ -7,6 +7,8 @@ int main(int argc, char *argv[])
 {
     Tester *test = constructTester(atoi(argv[argc-1]));
 
+    printTree(test);
+
     printHeight(test);
 
     freeTester(test);

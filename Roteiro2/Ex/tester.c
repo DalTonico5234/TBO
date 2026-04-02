@@ -1,0 +1,62 @@
+#include "tester.h"
+#include "BST.h"
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+struct tester
+{
+    int N;
+    BST *tree;
+};
+
+Tester *constructTester(int N)
+{
+    Tester *test = (Tester *)malloc(sizeof(Tester));
+
+    test->N = N;
+
+    srand(time(NULL));
+
+    if (N > 0)
+    {
+        test->tree = constructBST(rand());
+    }
+
+    for (int i = 1; i < test->N; i++)
+    {
+        insertKey(test->tree, rand());
+    }
+
+    return test;
+}
+
+void printTree(Tester *test)
+{
+    recursive_pre_order_transveral(test->tree, print);
+    printf("\n\n");
+    iterative_pre_order_transveral(test->tree, print);
+    printf("\n\n\n");
+
+    recursive_in_order_transveral(test->tree, print);
+    printf("\n\n");
+    iterative_in_order_transveral(test->tree, print);
+    printf("\n\n\n");
+
+    recursive_post_order_transveral(test->tree, print);
+    printf("\n\n");
+    iterative_post_order_transveral(test->tree, print);
+    printf("\n\n\n");
+}
+
+void printHeight(Tester *test)
+{
+    printf("%d\n", height(test->tree));
+}
+
+void freeTester(Tester *test)
+{
+    freeBST(test->tree);
+
+    free(test);
+}

@@ -17,4 +17,4 @@ debug:
 	gcc *.c -c -Wall -Wextra -Werror
 	gcc *.o -o main
 	rm *.o
-	valgrind -s --leak-check=full --show-leak-kinds=all ./main 1000
+	valgrind -s --leak-check=full --show-leak-kinds=all ./main 10

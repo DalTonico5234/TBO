@@ -1,11 +1,13 @@
 #ifndef BST_h
 #define BST_h
 
+#include "pilha.h"
+
 typedef struct bst BST;
 
 typedef void(*visit)(BST*);
 
-BST *constructBST();
+BST *constructBST(int value);
 
 void insertKey(BST *tree, int key);
 
@@ -16,6 +18,12 @@ void recursive_pre_order_transveral(BST *tree, void (*visit)(BST *));
 void recursive_in_order_transveral(BST *tree, void (*visit)(BST*));
 
 void recursive_post_order_transveral(BST *tree, void (*visit)(BST *));
+
+void iterative_pre_order_transveral(BST *tree, void (*visit)(BST *));
+
+void iterative_in_order_transveral(BST *tree, void (*visit)(BST *));
+
+void iterative_post_order_transveral(BST *tree, void (*visit)(BST *));
 
 void print(BST *tree);
 

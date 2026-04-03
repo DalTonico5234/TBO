@@ -11,7 +11,7 @@ void empilha(Pilha *sonic, void *dado);
 
 void desempilha(Pilha *sonic, void *destino);
 
-int ehVazia(Pilha *sonic);
+int ehPilhaVazia(Pilha *sonic);
 
 void topo(Pilha *sonic, void *destino);
 

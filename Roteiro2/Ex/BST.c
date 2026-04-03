@@ -114,7 +114,7 @@ void iterative_pre_order_transveral(BST *tree, void (*visit)(BST *))
         BST *current = tree;
 
         empilha(sonic, &current);
-        while (!ehVazia(sonic))
+        while (!ehPilhaVazia(sonic))
         {
             desempilha(sonic, &current);
             visit(current);
@@ -139,7 +139,7 @@ void iterative_in_order_transveral(BST *tree, void (*visit)(BST *))
 
         BST *current = tree;
 
-        while (!ehVazia(sonic) || current != NULL)
+        while (!ehPilhaVazia(sonic) || current != NULL)
         {
             if (current != NULL)
             {
@@ -169,7 +169,7 @@ void iterative_post_order_transveral(BST *tree, void (*visit)(BST *))
 
         BST *peekNode;
 
-        while (!ehVazia(sonic) || current != NULL)
+        while (!ehPilhaVazia(sonic) || current != NULL)
         {
             if (current != NULL)
             {
@@ -200,6 +200,14 @@ void print(BST *tree)
     if (tree != NULL)
     {
         printf("%d ", tree->data);
+    }
+}
+
+void justVisit(BST *tree)
+{
+    if (tree != NULL)
+    {
+        return;
     }
 }
 

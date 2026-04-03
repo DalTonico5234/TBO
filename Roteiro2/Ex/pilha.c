@@ -44,7 +44,7 @@ void desempilha(Pilha *sonic, void *destino) {
   free(morto);
 }
 
-int ehVazia(Pilha *sonic)
+int ehPilhaVazia(Pilha *sonic)
 {
   return (sonic->topo == NULL);
 }

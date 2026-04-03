@@ -27,6 +27,8 @@ void iterative_post_order_transveral(BST *tree, void (*visit)(BST *));
 
 void print(BST *tree);
 
+void justVisit(BST *tree);
+
 void freeBST(BST *tree);
 
 #endif

@@ -14,6 +14,7 @@ Tester *constructTester(int N)
 {
     Tester *test = (Tester *)malloc(sizeof(Tester));
 
+    clock_t start = clock();
     test->N = N;
 
     srand(time(NULL));
@@ -28,58 +29,56 @@ Tester *constructTester(int N)
         insertKey(test->tree, rand());
     }
 
+    clock_t end = clock();
+
+    double seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Generation time: %lf\n", seconds);
+
     return test;
 }
 
 void printTree(Tester *test)
 {
     clock_t start = clock();
-    recursive_pre_order_transveral(test->tree, print);
+    recursive_pre_order_transveral(test->tree, justVisit);
     clock_t end = clock();
     double seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\nPre-order recursive time: %lf s\n", seconds);
+    printf("Pre-order recursive time: %lf s\n", seconds);
 
-    printf("\n\n");
     
     start = clock();
-    iterative_pre_order_transveral(test->tree, print);
+    iterative_pre_order_transveral(test->tree, justVisit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\nPre-order iterative time: %lf s\n", seconds);
+    printf("Pre-order iterative time: %lf s\n", seconds);
 
-    printf("\n\n\n");
 
     start = clock();
-    recursive_in_order_transveral(test->tree, print);
+    recursive_in_order_transveral(test->tree, justVisit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\nIn-order recursive time: %lf s\n", seconds);
+    printf("In-order recursive time: %lf s\n", seconds);
     
-    printf("\n\n");
 
     start = clock();
-    iterative_in_order_transveral(test->tree, print);
+    iterative_in_order_transveral(test->tree, justVisit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\nIn-order iterative time: %lf s\n", seconds);
+    printf("In-order iterative time: %lf s\n", seconds);
 
-    printf("\n\n\n");
 
     start = clock();
-    recursive_post_order_transveral(test->tree, print);
+    recursive_post_order_transveral(test->tree, justVisit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\nPost-order recursive time: %lf s\n", seconds);
+    printf("Post-order recursive time: %lf s\n", seconds);
 
-    printf("\n\n");
 
     start = clock();
-    iterative_post_order_transveral(test->tree, print);
+    iterative_post_order_transveral(test->tree, justVisit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\nPost-order iterative time: %lf s\n", seconds);
-    
-    printf("\n\n\n");
+    printf("Post-order iterative time: %lf s\n", seconds);
 }
 
 void printHeight(Tester *test)

@@ -2,6 +2,7 @@
 #define BST_h
 
 #include "pilha.h"
+#include "fila.h"
 
 typedef struct bst BST;
 
@@ -24,6 +25,8 @@ void iterative_pre_order_transveral(BST *tree, void (*visit)(BST *));
 void iterative_in_order_transveral(BST *tree, void (*visit)(BST *));
 
 void iterative_post_order_transveral(BST *tree, void (*visit)(BST *));
+
+void level_order_transversal(BST *tree, void (*visit)(BST *));
 
 void print(BST *tree);
 

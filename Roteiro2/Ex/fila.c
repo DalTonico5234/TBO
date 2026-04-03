@@ -48,10 +48,11 @@ void sai(Fila *posto, void *destino)
 {
     if (posto->primeiro != NULL)
     {
-        No *morto = posto->ultimo;
+        No *morto = posto->primeiro;
         memcpy(destino, morto->dado, posto->tam_elem);
 
         No *prox = posto->primeiro->prox;
+        free(posto->primeiro->dado);
         free(posto->primeiro);
         posto->primeiro = prox;
 

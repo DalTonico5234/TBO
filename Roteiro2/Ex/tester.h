@@ -3,9 +3,11 @@
 
 typedef struct tester Tester;
 
+#include "BST.h"
+
 Tester *constructTester(int N);
 
-void printTree(Tester *test);
+void visitTree(Tester *test, void (*visit)(BST *));
 
 void printHeight(Tester *test);
 

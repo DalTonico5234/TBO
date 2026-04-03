@@ -1,5 +1,4 @@
 #include "tester.h"
-#include "BST.h"
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -37,48 +36,54 @@ Tester *constructTester(int N)
     return test;
 }
 
-void printTree(Tester *test)
+void visitTree(Tester *test, void (*visit)(BST *) )
 {
     clock_t start = clock();
-    recursive_pre_order_transveral(test->tree, justVisit);
+    recursive_pre_order_transveral(test->tree, visit);
     clock_t end = clock();
     double seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("Pre-order recursive time: %lf s\n", seconds);
 
     
     start = clock();
-    iterative_pre_order_transveral(test->tree, justVisit);
+    iterative_pre_order_transveral(test->tree, visit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("Pre-order iterative time: %lf s\n", seconds);
 
 
     start = clock();
-    recursive_in_order_transveral(test->tree, justVisit);
+    recursive_in_order_transveral(test->tree, visit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("In-order recursive time: %lf s\n", seconds);
     
 
     start = clock();
-    iterative_in_order_transveral(test->tree, justVisit);
+    iterative_in_order_transveral(test->tree, visit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("In-order iterative time: %lf s\n", seconds);
 
 
     start = clock();
-    recursive_post_order_transveral(test->tree, justVisit);
+    recursive_post_order_transveral(test->tree, visit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("Post-order recursive time: %lf s\n", seconds);
 
 
     start = clock();
-    iterative_post_order_transveral(test->tree, justVisit);
+    iterative_post_order_transveral(test->tree, visit);
     end = clock();
     seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("Post-order iterative time: %lf s\n", seconds);
+
+    start = clock();
+    level_order_transversal(test->tree, visit);
+    end = clock();
+    seconds = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Level-order time: %lf s\n", seconds);
 }
 
 void printHeight(Tester *test)

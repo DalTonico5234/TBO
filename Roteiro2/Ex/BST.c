@@ -195,6 +195,33 @@ void iterative_post_order_transveral(BST *tree, void (*visit)(BST *))
     }
 }
 
+void level_order_transversal(BST *tree, void (*visit)(BST *))
+{
+    if (tree != NULL)
+    {
+        Fila *posto = criaFila(sizeof(BST *));
+
+        BST *current = tree;
+
+        entra(posto, &current);
+
+        while (!ehFilaVazia(posto))
+        {
+            sai(posto, &current);
+            visit(current);
+            if (current->left != NULL)
+            {
+                entra(posto, &current->left);
+            }
+            if (current->right != NULL)
+            {
+                entra(posto, &current->right);
+            }
+        }
+        destroiFila(posto);
+    }
+}
+
 void print(BST *tree)
 {
     if (tree != NULL)

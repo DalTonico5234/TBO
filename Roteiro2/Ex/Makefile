@@ -1,4 +1,4 @@
-all: compile loop
+all: compile comparation
 
 N ?= 1000
 
@@ -12,6 +12,9 @@ compile:
 
 run:
 	./main 1000000 >> heights.txt &
+
+comparation:
+	./main 10000000
 
 debug:
 	gcc *.c -c -Wall -Wextra -Werror

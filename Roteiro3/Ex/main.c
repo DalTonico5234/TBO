@@ -19,14 +19,14 @@ int main(int argc, char *argv[])
     clock_t inicio = clock();
     sort(array, 0, N-1);
     clock_t fim = clock();
-    double tempo = (double)((fim - inicio) / CLOCKS_PER_SEC);
+    double tempo = (double)((double)(fim - inicio) / CLOCKS_PER_SEC);
 
-    printf("\nTempo de ordenação: %.2lf\n\n", tempo);
+    printf("%.4lf\n", tempo);
 
-    for (int i=0; i < N; i++)
-    {
-        printf("%d\n", array[i]);
-    }
+    // for (int i=0; i < N; i++)
+    // {
+    //     printf("%d\n", array[i]);
+    // }
 
     free(array);
 }

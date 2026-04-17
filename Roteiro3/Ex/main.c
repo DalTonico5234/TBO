@@ -7,9 +7,9 @@ extern void sort(Item *a, int lo, int hi);
 
 int main(int argc, char *argv[])
 {
-    int N = argv[argc-1];
+    int N = atoi(argv[argc-1]);
     
-    Item *array = (Item *) calloc (argv[argc-1], sizeof(Item));
+    Item *array = (Item *) calloc (N, sizeof(Item));
 
     for (int i=0; i < N; i++)
     {
@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     }
 
     clock_t inicio = clock();
-    // sort
+    sort(array, 0, N-1);
     clock_t fim = clock();
     double tempo = (double)((fim - inicio) / CLOCKS_PER_SEC);
 

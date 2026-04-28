@@ -1,4 +1,6 @@
-all:
+all: compile_0 compile_v7 clear run
+
+debug: debug_compile_0 compile_v7 clear quick_debug
 
 debug_compile_0:
 	gcc *.c -c -g -Wall -Wextra -Werror
@@ -10,29 +12,34 @@ compile_v1:
 	gcc	main.o merge_v1.o -o main
 
 compile_v2:
-	gcc	main.o merge_v2.o -o main
+	gcc	main.o merge_v2.o insertion_sort.o -o main
 
 compile_v3:
 	gcc main.o merge_v3.o -o main
 
 compile_v4:
-	gcc	main.o merge_v4.o -o main
+	gcc	main.o merge_v4.o insertion_sort.o -o main
 
 compile_v5:
 	gcc	main.o merge_v5.o -o main
 
 compile_v6:
-	gcc	main.o merge_v6.o -o main
+	gcc	main.o merge_v6.o insertion_sort.o -o main
 
 compile_v7:
-	gcc	main.o merge_v7.o -o main
+	gcc	main.o merge_v7.o insertion_sort.o -o main
 
 clear:
 	rm *.o
 
-run: run_nearly_sorted_100000 run_nearly_sorted_1000000 run_reverse_sorted_100000 run_reverse_sorted_1000000 run_sorted_100000 run_sorted_1000000 run_unif_rand_100000 run_unif_rand_1000000
+clear_output:
+	rm out.txt
 
-debug: debug_nearly_sorted_100000 debug_nearly_sorted_1000000 debug_reverse_sorted_100000 debug_reverse_sorted_1000000 debug_sorted_100000 debug_sorted_1000000 debug_unif_rand_100000 debug_unif_rand_1000000
+real_run: run_nearly_sorted_100000 run_nearly_sorted_1000000 run_reverse_sorted_100000 run_reverse_sorted_1000000 run_sorted_100000 run_sorted_1000000 run_unif_rand_100000 run_unif_rand_1000000
+
+run: clear_output real_run
+
+# debug: debug_nearly_sorted_100000 debug_nearly_sorted_1000000 debug_reverse_sorted_100000 debug_reverse_sorted_1000000 debug_sorted_100000 debug_sorted_1000000 debug_unif_rand_100000 debug_unif_rand_1000000
 
 quick_debug:
 	valgrind --leak-check=full --show-leak-kinds=all -s ./main 1000 <../../Roteiro3/Ex/in/unif_rand/1Kunif_rand.txt >test.txt

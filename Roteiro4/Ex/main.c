@@ -7,7 +7,14 @@ extern void sort(Item *a, int lo, int hi);
 
 int main(int argc, char *argv[])
 {
+    if (argc < 2)
+    {
+        printf("ERRO\n");
+        return 1;
+    }
+    
     int N = atoi(argv[argc-1]);
+    printf("N =  %d\n", N);
     
     Item *array = (Item *) calloc (N, sizeof(Item));
 
@@ -23,10 +30,12 @@ int main(int argc, char *argv[])
 
     printf("%.4lf\n", tempo);
 
-    // for (int i=0; i < N; i++)
-    // {
-    //     printf("%d\n", array[i]);
-    // }
+    for (int i=0; i < N; i++)
+    {
+        printf("%d\n", array[i]);
+    }
 
     free(array);
+
+    return 0;
 }

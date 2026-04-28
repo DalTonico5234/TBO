@@ -1,5 +1,5 @@
-#ifndef merge_v1_h
-#define merge_v1_h
+#ifndef merge_v6_h
+#define merge_v6_h
 
 #include "item.h"
 

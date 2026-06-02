@@ -100,6 +100,7 @@ double time_to_hit(Particle *p, Particle *q) {
     double drdr = dx*dx + dy*dy;
     double sigma = p->radius + q->radius;
     double d = (dvdr*dvdr) - dvdv * (drdr - sigma*sigma);
+    //if (drdr < sigma*sigma) printf("Overlapping particles!\n");
     if (d < 0) return INFINITY;
     return -(dvdr + sqrt(d)) / dvdv;
 }

@@ -5,9 +5,9 @@ typedef struct kwic KWIC;
 
 #include <stdio.h>
 
-KWIC *create_KWIC(FILE *input, int context);
+KWIC *create_KWIC(int context, FILE *input);
 
-void read(KWIC *system);
+void read(KWIC *syste);
 
 void create_suffix_array(KWIC *system);
 

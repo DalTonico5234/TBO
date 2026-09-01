@@ -1,4 +1,5 @@
 #include "Suffix.h"
+#include <stdlib.h>
 
 struct suffix
 {

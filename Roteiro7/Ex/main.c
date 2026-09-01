@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "KWIC_Search.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,7 +24,15 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
+    KWIC *system = create_KWIC(context, input);
+
+    read(system, input);
+
     fclose(input);
+
+    run(system);
+
+    free_KWIC(system);
 
     return 0;
 }

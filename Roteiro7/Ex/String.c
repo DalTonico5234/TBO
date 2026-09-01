@@ -1,6 +1,7 @@
 #include "String.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 struct string
 {
@@ -9,12 +10,13 @@ struct string
     int alocated_size;
 };
 
-String *create_string(char *c)
+String *create_string(String *c)
 {
     String *s = (String *)malloc(sizeof(String));
 
-    s->c = strdup(c);
-    s->len = s->alocated_size = strlen(c);
+    s->c = strdup(c->c);
+    s->len = s->alocated_size = strlen(s->c);
+    free_string(c);
 
     return s;
 }
@@ -23,7 +25,7 @@ String *create_empty_string()
 {
     String *s = (String *)malloc(sizeof(String));
 
-    s->c = (char *) calloc (ALOC_SIZE, sizeof(char));
+    s->c = (char *)calloc(ALOC_SIZE, sizeof(char));
     s->alocated_size = ALOC_SIZE;
     s->c[0] = '\0';
     s->len = 0;
@@ -33,10 +35,10 @@ String *create_empty_string()
 
 String *create_empty_string_by_size(int size)
 {
-        String *s = (String *)malloc(sizeof(String));
+    String *s = (String *)malloc(sizeof(String));
 
-    s->c = (char *) calloc (size+1, sizeof(char));
-    s->alocated_size = size+1;
+    s->c = (char *)calloc(size + 1, sizeof(char));
+    s->alocated_size = size + 1;
     s->c[0] = '\0';
     s->len = 0;
 
@@ -45,10 +47,10 @@ String *create_empty_string_by_size(int size)
 
 void append_to_string(String *s, char *c)
 {
-    if (s->len + strlen(c) > s->alocated_size)
+    if (s->len + (int)strlen(c) > s->alocated_size)
     {
         s->alocated_size += ALOC_SIZE;
-        s->c = (char *) realloc (s->c, s->alocated_size*sizeof(char));
+        s->c = (char *)realloc(s->c, s->alocated_size * sizeof(char));
         append_to_string(s, c);
         return;
     }
@@ -59,8 +61,10 @@ void append_to_string(String *s, char *c)
 
 void append_char_to_string(String *s, char c)
 {
-    s->c[s->len++] = c;
-    s->c[s->len] = '\0';
+    char c1[2];
+    c1[0] = c;
+    c1[1] = '\0';
+    strcat(s->c, c1);
 }
 
 int compare_from_string(String *s, String *t, int d)
@@ -82,14 +86,35 @@ int compare_from_string(String *s, String *t, int d)
 
 int compare(String *s, String *t)
 {
-    return compare_from(s, t, 0);
+    return compare_from_string(s, t, 0);
 }
 
 char get_char(String *s, int idx)
 {
-    if (s->len < idx) return '\0';
+    if (s->len < idx)
+        return '\0';
 
     return s->c[idx];
+}
+
+char get_last_char(String *s)
+{
+    return s->c[(int)strlen(s->c) - 1];
+}
+
+int get_len(String *s)
+{
+    return s->len;
+}
+
+char *get_real_string(String *s)
+{
+    return s->c;
+}
+
+void print_string(String *s)
+{
+    printf("%s\n", s->c);
 }
 
 void free_string(String *s)
